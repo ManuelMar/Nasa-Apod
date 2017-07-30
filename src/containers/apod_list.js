@@ -8,10 +8,11 @@ class ApodList extends Component{
 
     return(
       <div>
-      <h1>{this.props.apod.map(apod => apod.title )}</h1>
-      <img src = {this.props.apod.map(apod => apod.url)} />
-      <label>{this.props.apod.map(apod => apod.date )}</label>
-      <label>{this.props.apod.map(apod => apod.explanation )}</label>
+        <h1>{this.props.apod.map(apod => apod.title )}</h1>
+        <img src = {this.props.apod.map(apod => apod.url)} />
+        <br/>
+        <label>{this.props.apod.map(apod => apod.date )}</label>
+        <label>{this.props.apod.map(apod => apod.explanation )}</label>
       </div>
     );
   }
