@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {fetchApod} from '../actions/index';
-import {SingleDatePicker, isInclusivelyAfterDay} from 'react-dates';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchApod } from '../actions/index';
+import { SingleDatePicker, isInclusivelyAfterDay } from 'react-dates';
 import moment from 'moment';
 
 const today = moment().add(1, 'day');
 
-class SearchBar extends Component{
-  constructor(props){
+class SearchBar extends Component {
+  constructor(props) {
     super(props);
 
     this.state = {
-      term : '',
-      date : null,
-      focused : false
+      term: '',
+      date: today,
+      focused: false
     };
 
     // bind all functions
@@ -22,24 +22,23 @@ class SearchBar extends Component{
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
-    this.props.fetchApod("");
+    this.props.fetchApod('');
   }
 
-  onInputChange(event){
-    this.setState({term : event.target.value})
+  onInputChange(event) {
+    this.setState({ term: event.target.value });
   }
 
-
-  onFormSubmit(event){
+  onFormSubmit(event) {
     event.preventDefault();
-    console.log(this.state.date);
-    console.log(this.state.date.format('YYYY-MM-DD'));
+    //console.log(this.state.date);
+    //console.log(this.state.date.format('YYYY-MM-DD'));
     this.props.fetchApod(this.state.date.format('YYYY-MM-DD'));
-    this.setState({date : null});
+    this.setState({ date: today });
   }
 
-  onDateChange(date){
-    this.setState({date});
+  onDateChange(date) {
+    this.setState({ date });
   }
 
   /*<input
@@ -49,37 +48,30 @@ class SearchBar extends Component{
   </input>
   */
 
-  render(){
+  render() {
     return (
-      <form onSubmit = {this.onFormSubmit} className="input-group">
-          <SingleDatePicker
+      <form onSubmit={this.onFormSubmit} className="input-group">
+        <SingleDatePicker
+          date={this.state.date} // momentPropTypes.momentObj or null
+          onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+          focused={this.state.focused} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+          isOutsideRange={day => isInclusivelyAfterDay(day, today)}
+          placeholder={'Get the NASA APOD for any date'}
+        />
 
-            date={this.state.date} // momentPropTypes.momentObj or null
-            onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-            focused={this.state.focused} // PropTypes.bool
-            onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-            isOutsideRange = {day => isInclusivelyAfterDay(day,today)}
-            placeholder = {"Get the NASA APOD for any date"}
-
-          />
-
-
-        <span className = "input-group-btn">
-          <button type = "submit" className = "btn btn-secondary">
+        <span className="input-group-btn">
+          <button type="submit" className="btn btn-secondary">
             Submit
           </button>
         </span>
-
       </form>
-
     );
-
   }
-
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchApod},dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchApod }, dispatch);
 }
 
-export default connect(null,mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);
