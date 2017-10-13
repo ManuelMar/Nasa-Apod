@@ -32,8 +32,8 @@ class ApodList extends Component {
     return (
       <div>
         <h1>
-          {this.props.apod.map(apod => apod.date)}:<br />{' '}
-          {this.props.apod.map(apod => apod.title)}{' '}
+          {this.props.apod.map(apod => apod.date)}:<br />
+          {this.props.apod.map(apod => apod.title)}
         </h1>
         <div className="contain">
           <img

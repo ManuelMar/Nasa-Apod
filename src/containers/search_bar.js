@@ -34,7 +34,7 @@ class SearchBar extends Component {
     //console.log(this.state.date);
     //console.log(this.state.date.format('YYYY-MM-DD'));
     this.props.fetchApod(this.state.date.format('YYYY-MM-DD'));
-    this.setState({ date: today });
+    //this.setState({ date: today });
   }
 
   onDateChange(date) {
