@@ -31,10 +31,13 @@ class ApodList extends Component {
   render() {
     return (
       <div>
+        <h3>
+          {this.props.apod.map(apod => apod.date)}
+        </h3>
         <h1>
-          {this.props.apod.map(apod => apod.date)}:<br />
           {this.props.apod.map(apod => apod.title)}
         </h1>
+        <br />
         <div className="contain">
           <img
             onClick={this.toggleShow}

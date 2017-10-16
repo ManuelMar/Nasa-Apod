@@ -7,6 +7,10 @@ import moment from 'moment';
 
 const today = moment().add(1, 'day');
 
+// add Info about NASA and Title
+
+// logo at https://www.nasa.gov/images/content/256358main_Symbols2-xltn.jpg
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -50,22 +54,28 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit} className="input-group">
-        <SingleDatePicker
-          date={this.state.date} // momentPropTypes.momentObj or null
-          onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-          focused={this.state.focused} // PropTypes.bool
-          onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-          isOutsideRange={day => isInclusivelyAfterDay(day, today)}
-          placeholder={'Get the NASA APOD for any date'}
-        />
+      <div>
+        <form onSubmit={this.onFormSubmit} className="input-group">
+          <img
+            className="input-group-logo"
+            src="https://www.nasa.gov/images/content/256358main_Symbols2-xltn.jpg"
+          />
+          <SingleDatePicker
+            date={this.state.date} // momentPropTypes.momentObj or null
+            onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+            focused={this.state.focused} // PropTypes.bool
+            onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+            isOutsideRange={day => isInclusivelyAfterDay(day, today)}
+            placeholder={'Get the NASA APOD for any date'}
+          />
 
-        <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">
-            Submit
-          </button>
-        </span>
-      </form>
+          <span className="input-group-btn">
+            <button type="submit" className="btn btn-secondary">
+              Submit
+            </button>
+          </span>
+        </form>
+      </div>
     );
   }
 }

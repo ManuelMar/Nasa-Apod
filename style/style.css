@@ -1,5 +1,10 @@
 .input-group {
   margin: 20px 0px;
+  display: inline-block;
+}
+
+.input-group-logo {
+  width: 20%;
 }
 
 img {
@@ -8,7 +13,6 @@ img {
 
 .img-data {
   padding-top: 10px;
-  #background-color: #eaedef;
 }
 
 .contain {
